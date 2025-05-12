@@ -1,4 +1,4 @@
-# DICOM Load Balancer
+# DICOM Load Balancer (WIP)
 
 A scalable, high-performance DICOM load-balancer and router designed for medical imaging workflows. This solution provides zero-downtime operation for PACS (Picture Archiving and Communication System) environments, supporting advanced routing rules, automated health-checks, and seamless integration into any medical-imaging infrastructure.
 
