@@ -30,7 +30,7 @@ RUN apk update && apk add --no-cache \
 FROM alpine:3.21
 
 LABEL maintainer="Omer Segev"
-LABEL description="This image contains DCMTK and is used to run the forwarder."
+LABEL description="This image contains DCMTK ${dcmtk_version} and is used to run the forwarder."
 
 # Install runtime dependencies
 RUN apk add --no-cache \
@@ -40,7 +40,9 @@ RUN apk add --no-cache \
     libpng \
     openssl \
     libxml2 \
-    haproxy
+    haproxy \
+    libstdc++ \
+    libgcc
 
 # Copy built DCMTK from builder stage
 COPY --from=builder /tmp/dcmtk/ /
