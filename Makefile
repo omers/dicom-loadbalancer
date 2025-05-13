@@ -2,6 +2,7 @@
 SHELL := /bin/bash
 .SHELLFLAGS := -ec
 VERSION_FILE := version.txt
+IMAGE_NAME := dicom-loadbalancer
 
 
 # Colors for terminal output
@@ -25,17 +26,17 @@ help:
 .PHONY: build
 build:
 	@echo "Start building..."
-	podman build --build-arg dcmtk_version=$$(cat $(VERSION_FILE)) -t dicom-router:$$(cat $(VERSION_FILE)) .
-	podman tag dicom-router:$$(cat $(VERSION_FILE)) dicom-router:latest
+	podman build --build-arg dcmtk_version=$$(cat $(VERSION_FILE)) -t $(IMAGE_NAME):$$(cat $(VERSION_FILE)) .
+	podman tag $(IMAGE_NAME):$$(cat $(VERSION_FILE)) $(IMAGE_NAME):latest
 
 .PHONY: run run-bash
 run:
 	@echo "Start running..."
-	podman run -it -p 11211:11211 -p 8404:8404 -v ${PWD}/dicom-samples:/data --rm --name dicom-router dicom-router:latest
+	podman run -it -p 11211:11211 -p 8404:8404 -v ${PWD}/dicom-samples:/data --rm --name $(IMAGE_NAME) $(IMAGE_NAME):latest
 
 run-bash:
 	@echo "Start running..."
-	podman run -it -p 11211:11211 -p 8404:8404 -v ${PWD}/dicom-samples:/data --entrypoint=/bin/bash --rm --name dicom-router dicom-router:latest
+	podman run -it -p 11211:11211 -p 8404:8404 -v ${PWD}/dicom-samples:/data --entrypoint=/bin/bash --rm --name $(IMAGE_NAME) $(IMAGE_NAME):latest
 
 .PHONY: bump-version show-version
 
