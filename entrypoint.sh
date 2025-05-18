@@ -8,8 +8,8 @@ function run_storescp {
 
 # Start the first process
 haproxy -f /etc/haproxy/haproxy.cfg &
-run_storescp /tmp/zbabe 11212 &
-run_storescp /tmp/zbabe2 11213 &
+run_storescp /tmp/store1 11212 &
+run_storescp /tmp/store2 11213 &
 
 # Wait for any process to exit
 wait -n
